@@ -4,8 +4,6 @@ TriggerEvent('RebornCore:GetObject', function(obj) RebornCore = obj end)
 
 local OutsideVehicles = {}
 
--- code
-
 RegisterServerEvent('cash-garagesystem:server:RemoveVehicle')
 AddEventHandler('cash-garagesystem:server:RemoveVehicle', function(CitizenId, Plate)
     if OutsideVehicles[CitizenId] ~= nil then
@@ -54,14 +52,6 @@ end)
 RebornCore.Functions.CreateCallback("cash-garage:server:GetVehicleProperties", function(source, cb, plate)
     local src = source
     local properties = {}
-
-
-
-
-    -- RebornCore.Functions.ExecuteSql(false, "SELECT `mods` FROM `player_vehicles` WHERE `plate` = '"..plate.."'", function(result)
-
-    -- end)
-
     local result = exports.ghmattimysql:execute('SELECT `mods` FROM player_vehicles WHERE plate=@plate', {['@plate'] = plate})
 
     if result[1] ~= nil then
@@ -147,7 +137,6 @@ AddEventHandler('cash-garage:server:updateVehicleState', function(state, plate, 
     local pData = RebornCore.Functions.GetPlayer(src)
 
     exports['ghmattimysql']:execute('UPDATE player_vehicles SET state = @state, garage = @garage, depotprice = @depotprice WHERE plate = @plate', {['@state'] = state, ['@plate'] = plate, ['@depotprice'] = 0, ['@citizenid'] = pData.PlayerData.citizenid, ['@garage'] = garage})
-    -- print('updated')
 end)
 
 RegisterServerEvent('cash-garage:server:updateVehicleStatus')
