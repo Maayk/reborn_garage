@@ -1,0 +1,265 @@
+.container-garage{
+     position: relative;
+     display: none;
+     top: 20vh;
+     right: 0;
+     left: 0;
+     margin: auto;
+     width: 108vh;
+     height: 55vh;
+     padding-left: 3.5vh;
+     padding-top: 11vh;
+     background-image: url(img/garagewallpaper.png);
+     background-position: center;
+     background-color: black;
+}
+
+.top-header{
+     position: absolute;
+     width: 71.3%;
+     top: 0;
+     left: 0;
+     height: 10vh;
+}
+.logo-header{
+     position: relative;
+     background-image: url(img/logo.png);
+     width: 13vh;
+     height: 13vh;
+     left: 5vh;
+     top: 0vh;
+     background-size: contain;
+     background-position: center;
+     background-repeat: no-repeat;
+}
+.center-icon{
+     position: relative;
+     width: 100%;
+     text-align: center;
+     top: 6vh;
+ }
+.center-icon i{
+     font-size: 4vh;
+     color: gray;
+}
+.container-carro-info{
+     position: absolute;
+     bottom: 0;
+     height: 100%;
+     width: 100%;
+     background-position: 0vh 36vh;
+     transition: all 0.2s;
+     background-image: url(img/hover.png);
+     opacity: 0.5;
+}
+.container-carro-info:hover{
+     transition: all 0.2s;
+     opacity: 1;
+}
+.titulo-placa{
+     position: relative;
+     font-size: 1.3vh;
+     left: 1.4vh;
+     top: 17vh;
+}
+.titulo-carro{
+     position: relative;
+     left: 1.4vh;
+     top: 17vh;
+     font-size: 1.9vh;
+     font-variant-caps: small-caps;
+}
+.titulo-status{
+     position: relative;
+     left: 1.4vh;
+     top: 17vh;
+     font-size: 1.3vh;
+     font-variant-caps: all-petite-caps;
+}
+.garagem-nome{
+     position: absolute;
+     top: 5vh;
+     right: 8vh;
+     color: white;
+     width: 34vh;
+     text-align: right;
+     font-size: 3vh;
+}
+.lista-carros{
+     height: 28vh;
+     width: 71vh;
+     color: white;
+     display: block;
+     padding-left: 2vh;
+     overflow-x: hidden;
+     overflow-y: scroll;
+ }
+ .fechar-garagem{
+     color: white;
+     position: absolute;
+     top: 0;
+     right: 0;
+     background-color: black;
+     width: 4vh;
+     text-align: center;
+     border-bottom-left-radius: 1vh;
+     transition: all 0.2s;
+ }
+ .reborn-plate{
+     position: relative;
+     background-image: url(img/rebornplate.png);
+     display: flex;
+     justify-content: center;
+     width: 100%;
+     height: 6vh;
+     background-position: center;
+     background-size: contain;
+     background-repeat: no-repeat;
+     line-height: 6vh;
+     font-weight: 600;
+     display: none;
+ }
+
+
+ .fechar-garagem:hover{
+     transition: all 0.2s;
+     background-color: white;
+     color: black;;
+
+ }
+ .fechar-garagem i {
+     font-size: 3vh !important;
+ }
+ 
+.lista-carros::-webkit-scrollbar {
+     width: 0.5vh;
+     background: transparent;
+ }
+ .lista-carros::-webkit-scrollbar-track {
+     -webkit-box-shadow: inset 0 0 0.6vh rgba(0,0,0,0.3);
+     background-color: transparent;
+}
+ 
+ .lista-carros::-webkit-scrollbar-thumb {
+     background-color: #2b81f1;
+     border-radius: 5vh;
+ }
+ 
+.veiculo-info{
+     position: relative;
+     float: left;
+     width: 20vh;
+     height: 26vh;
+     background-color: #000000c9;
+     margin-right: 1.7vh;
+     margin-top: 1vh;
+     margin-bottom: 1vh;
+     border: 0.1vh solid rgb(55, 54, 51);
+     background-image: url(img/keys.png);
+     background-size: 13vh;
+     background-position: 4vh 1vh;
+     background-repeat: no-repeat;
+     transition: all 0.2s;
+}
+.veiculo-info:hover{
+     border: 0.1vh solid rgb(69 152 255 / 40%);
+     transition: all 0.2s;
+}
+.garage-left-container{
+     position: absolute;
+     top: 0vh;
+     right: 0;
+     background-color: #007fffcc;
+     height: 100%;
+     width: 31vh;
+}
+.left-carro-imagem{
+     position: relative;
+     top: 0;
+     width: 100%;
+     height: 18.3vh;
+     background-color: #275c92ba;
+     /* background-image: url(img/t20.png); */
+     background-size: cover;
+     background-repeat: no-repeat;
+     opacity: 0.0;
+     transition: all 0.2s;
+}
+.depot-pagar-veiculo{
+     display: none;
+}
+.pegar-veiculo{
+     display: none;
+}
+.garage-footer-container{
+     position: absolute;
+     display: flex;
+     justify-content: center;
+     bottom: 0;
+     left: 0;
+     width: 71.2%;
+     height: 13vh;
+     background-color: rgba(0, 0, 0, 0.699);
+}
+.garage-footer-container button{
+     position: relative;
+     top: 4vh;
+     border: none;
+     background-color: #007fffcc;
+     color: white;
+     width: 18vh;
+     height: 5vh;
+     border-radius: 1vh;
+     transition: all 0.2s;
+}
+button:hover{
+     background-color: #ffffff;
+     color: black;;
+     transition: all 0.2s;
+}
+.garage-footer-container button:focus{
+     outline: none;
+     color: white;
+     background-color: #0454a3cc;
+     transition: all 0.2s;
+}
+.field-text{
+     color: white;
+     font-variant-caps: all-small-caps;
+     font-size: 1.4vh;
+     margin-left: 0.6vh;
+}
+.field-text-item{
+     position: relative;
+     width: 100%;
+     height: 2.7vh;
+     background-color: #275c92ba;
+     text-align: center;
+     font-family: unset;
+     color: white;
+}
+.container-progress{
+     position: relative;
+     width: 28vh;
+     left: 1.5vh;
+     margin-top: 0.5vh;
+     margin-bottom: 0.5vh;
+}
+.field-progressbar{
+     color: #2196F3;
+     border-radius: 1vh;
+     transition: all 0.2s;
+     width: 0%;
+}
+.field-progressbar2{
+     color: #2196F3;
+     border-radius: 1vh;
+     transition: all 0.2s;
+     width: 0%;
+}
+.field-progressbar3{
+     color: #2196F3;
+     border-radius: 1vh;
+     transition: all 0.2s;
+     width: 0%;
+}

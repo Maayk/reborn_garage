@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href="style.css" rel="stylesheet" type="text/css" />
+     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script> 
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+     <title>Reborn Garagem</title>
+</head>
+     <body>
+          <div class="container-garage">
+               <div class="carro-center">
+                    <div class="top-header">
+                         <div class="logo-header"></div>
+                         <div class="garagem-nome"></div>
+                    </div>
+                    <div class="lista-carros">
+                         <!-- <div class="veiculo-info carro-id-`+carroid+`">
+                              <div class="container-carro-info">
+                                   <div class="titulo-placa">06CMZ288</div>
+                                   <div class="titulo-carro">Comet SV</div>
+                                   <div class="titulo-status">Garagem</div>
+                              </div>
+                         </div>
+                         <div class="veiculo-info carro-id-`+carroid+`">
+                              <div class="container-carro-info">
+                                   <div class="titulo-placa">3UW868RF</div>
+                                   <div class="titulo-carro">Kuruma</div>
+                                   <div class="titulo-status">Garagem</div>
+                              </div>
+                         </div>
+                         <div class="veiculo-info carro-id-`+carroid+`">
+                              <div class="container-carro-info">
+                                   <div class="titulo-placa">47RVV704</div>
+                                   <div class="titulo-carro">Comet Retro Custom</div>
+                                   <div class="titulo-status">Garagem</div>
+                              </div>
+                         </div> -->
+                    </div>
+                    <div class="garage-left-container">
+                         <div class="left-carro-imagem"></div>
+
+                         <span class="field-text">Veículo</span>
+                         <div class="field-text-item" id="nome-do-carro"></div>
+                         <span class="field-text">Quilometragem</span>
+                         <div class="field-text-item" id="quilometragem"></div>
+                         <span class="field-text">Lataria</span>
+                         <div class="container-progress">
+                              <div class="determinate white field-progressbar" id="lataria">&nbsp;</div>
+                         </div>
+                         <span class="field-text">Motor</span>
+                         <div class="container-progress">
+                              <div class="determinate white field-progressbar2" id="motor-carro">&nbsp;</div>
+                         </div>
+                         <span class="field-text">Combustivel</span>
+                         <div class="container-progress">
+                              <div class="determinate white field-progressbar3" id="combustivel-carro">&nbsp;</div>
+                         </div>
+                         <div class="reborn-plate">
+                              <span class="numero-placa"></span>
+                         </div>
+                    </div>
+
+                    </div>
+                    <div class="garage-footer-container">
+                         <button class="pegar-veiculo">Retirar Veículo</button>
+                         <button class="depot-pagar-veiculo">Pagar e Retirar</button>
+                    </div>
+                    <div class="fechar-garagem">
+                         <i class="large material-icons">close</i>
+                    </div> 
+               </div>
+
+          </div>
+
+        <script src="app.js" type="text/javascript"></script>
+     </body>
+</html>
