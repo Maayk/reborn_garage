@@ -10,8 +10,6 @@ Citizen.CreateThread(function()
     end
 end)
 
---- CODE0
-
 local currentHouseGarage = nil
 local hasGarageKey = nil
 local currentGarage = nil
@@ -32,191 +30,6 @@ RegisterNetEvent('cash-garagesystem:client:addHouseGarage')
 AddEventHandler('cash-garagesystem:client:addHouseGarage', function(house, garageInfo)
     HouseGarages[house] = garageInfo
 end)
-
--- RegisterNetEvent('cash-garagesystem:client:takeOutDepot')
--- AddEventHandler('cash-garagesystem:client:takeOutDepot', function(vehicle)
---     if OutsideVehicles ~= nil and next(OutsideVehicles) ~= nil then
---         if OutsideVehicles[vehicle.plate] ~= nil then
---             local VehExists = DoesEntityExist(OutsideVehicles[vehicle.plate])
---             if not VehExists then
---                 RebornCore.Functions.SpawnVehicle(vehicle.vehicle, function(veh)
---                     RebornCore.Functions.TriggerCallback('cash-garage:server:GetVehicleProperties', function(properties)
---                         RebornCore.Functions.SetVehicleProperties(veh, properties)
---                         enginePercent = round(vehicle.engine / 10, 0)
---                         bodyPercent = round(vehicle.body / 10, 0)
---                         currentFuel = vehicle.fuel
-
---                         if vehicle.plate ~= nil then
---                             DeleteVehicle(OutsideVehicles[vehicle.plate])
---                             OutsideVehicles[vehicle.plate] = veh
---                             TriggerServerEvent('cash-garagesystem:server:UpdateOutsideVehicles', OutsideVehicles)
---                         end
-
---                         if vehicle.status ~= nil and next(vehicle.status) ~= nil then
---                             TriggerServerEvent('cash-vehicletuner:server:LoadStatus', vehicle.status, vehicle.plate)
---                         end
-                        
---                         if vehicle.drivingdistance ~= nil then
---                             local amount = round(vehicle.drivingdistance / 1000, -2)
---                             TriggerEvent('cash-overallhud:client:UpdateDrivingMeters', true, amount)
---                             TriggerServerEvent('cash-vehicletuner:server:UpdateDrivingDistance', vehicle.drivingdistance, vehicle.plate)
---                         end
-
---                         if vehicle.vehicle == "urus" then
---                             SetVehicleExtra(veh, 1, false)
---                             SetVehicleExtra(veh, 2, true)
---                         end
-
---                         SetVehicleNumberPlateText(veh, vehicle.plate)
---                         SetEntityHeading(veh, Depots[currentGarage].takeVehicle.h)
---                         TaskWarpPedIntoVehicle(GetPlayerPed(-1), veh, -1)
---                         exports['LegacyFuel']:SetFuel(veh, vehicle.fuel)
---                         SetEntityAsMissionEntity(veh, true, true)
---                         doCarDamage(veh, vehicle)
---                         TriggerServerEvent('cash-garage:server:updateVehicleState', 0, vehicle.plate, vehicle.garage)
---                         RebornCore.Functions.Notify("Vehicle out: Motor: " .. enginePercent .. "% Body: " .. bodyPercent.. "% Fuel: "..currentFuel.. "%", "primary", 4500)
---                         --closeMenuFull()
---                         SetVehicleEngineOn(veh, true, true)
---                     end, vehicle.plate)
---                     TriggerEvent("vehiclekeys:client:SetOwner", vehicle.plate)
---                 end, Depots[currentGarage].spawnPoint, true)
---             else
---                 local Engine = GetVehicleEngineHealth(OutsideVehicles[vehicle.plate])
---                 if Engine < 40.0 then
---                     RebornCore.Functions.SpawnVehicle(vehicle.vehicle, function(veh)
---                         RebornCore.Functions.TriggerCallback('cash-garage:server:GetVehicleProperties', function(properties)
---                             RebornCore.Functions.SetVehicleProperties(veh, properties)
---                             enginePercent = round(vehicle.engine / 10, 0)
---                             bodyPercent = round(vehicle.body / 10, 0)
---                             currentFuel = vehicle.fuel
-    
---                             if vehicle.plate ~= nil then
---                                 DeleteVehicle(OutsideVehicles[vehicle.plate])
---                                 OutsideVehicles[vehicle.plate] = veh
---                                 TriggerServerEvent('cash-garagesystem:server:UpdateOutsideVehicles', OutsideVehicles)
---                             end
-
---                             if vehicle.status ~= nil and next(vehicle.status) ~= nil then
---                                 TriggerServerEvent('cash-vehicletuner:server:LoadStatus', vehicle.status, vehicle.plate)
---                             end
-                            
---                             if vehicle.drivingdistance ~= nil then
---                                 local amount = round(vehicle.drivingdistance / 1000, -2)
---                                 TriggerEvent('cash-overallhud:client:UpdateDrivingMeters', true, amount)
---                                 TriggerServerEvent('cash-vehicletuner:server:UpdateDrivingDistance', vehicle.drivingdistance, vehicle.plate)
---                             end
-    
---                             SetVehicleNumberPlateText(veh, vehicle.plate)
---                             SetEntityHeading(veh, Depots[currentGarage].takeVehicle.h)
---                             TaskWarpPedIntoVehicle(GetPlayerPed(-1), veh, -1)
---                             exports['LegacyFuel']:SetFuel(veh, vehicle.fuel)
---                             SetEntityAsMissionEntity(veh, true, true)
---                             doCarDamage(veh, vehicle)
---                             TriggerServerEvent('cash-garage:server:updateVehicleState', 0, vehicle.plate, vehicle.garage)
---                             RebornCore.Functions.Notify("Vehicle Off: Motor: " .. enginePercent .. "% Body: " .. bodyPercent.. "% Fuel: "..currentFuel.. "%", "primary", 4500)
---                             --closeMenuFull()
---                             SetVehicleEngineOn(veh, true, true)
---                         end, vehicle.plate)
---                         TriggerEvent("vehiclekeys:client:SetOwner", vehicle.plate)
---                     end, Depots[currentGarage].spawnPoint, true)
---                 else
---                     RebornCore.Functions.Notify('You cannot duplicate this vehicle..', 'error')
---                     AddTemporaryBlip(OutsideVehicles[vehicle.plate])
---                 end
---             end
---         else
---             RebornCore.Functions.SpawnVehicle(vehicle.vehicle, function(veh)
---                 RebornCore.Functions.TriggerCallback('cash-garage:server:GetVehicleProperties', function(properties)
---                     RebornCore.Functions.SetVehicleProperties(veh, properties)
---                     enginePercent = round(vehicle.engine / 10, 0)
---                     bodyPercent = round(vehicle.body / 10, 0)
---                     currentFuel = vehicle.fuel
-
---                     if vehicle.plate ~= nil then
---                         OutsideVehicles[vehicle.plate] = veh
---                         TriggerServerEvent('cash-garagesystem:server:UpdateOutsideVehicles', OutsideVehicles)
---                     end
-
---                     if vehicle.status ~= nil and next(vehicle.status) ~= nil then
---                         TriggerServerEvent('cash-vehicletuner:server:LoadStatus', vehicle.status, vehicle.plate)
---                     end
-
---                     SetVehicleNumberPlateText(veh, vehicle.plate)
---                     SetEntityHeading(veh, Depots[currentGarage].takeVehicle.h)
---                     TaskWarpPedIntoVehicle(GetPlayerPed(-1), veh, -1)
---                     exports['LegacyFuel']:SetFuel(veh, vehicle.fuel)
---                     SetEntityAsMissionEntity(veh, true, true)
---                     doCarDamage(veh, vehicle)
---                     TriggerServerEvent('cash-garage:server:updateVehicleState', 0, vehicle.plate, vehicle.garage)
---                     RebornCore.Functions.Notify("Vehicle out: Motor: " .. enginePercent .. "% Body: " .. bodyPercent.. "% Fuel: "..currentFuel.. "%", "primary", 4500)
---                     --closeMenuFull()
---                     SetVehicleEngineOn(veh, true, true)
---                 end, vehicle.plate)
---                 TriggerEvent("vehiclekeys:client:SetOwner", vehicle.plate)
---             end, Depots[currentGarage].spawnPoint, true)
---         end
---     else
---         RebornCore.Functions.SpawnVehicle(vehicle.vehicle, function(veh)
---             RebornCore.Functions.TriggerCallback('cash-garage:server:GetVehicleProperties', function(properties)
---                 RebornCore.Functions.SetVehicleProperties(veh, properties)
---                 enginePercent = round(vehicle.engine / 10, 0)
---                 bodyPercent = round(vehicle.body / 10, 0)
---                 currentFuel = vehicle.fuel
-
---                 if vehicle.plate ~= nil then
---                     OutsideVehicles[vehicle.plate] = veh
---                     TriggerServerEvent('cash-garagesystem:server:UpdateOutsideVehicles', OutsideVehicles)
---                 end
-
---                 if vehicle.status ~= nil and next(vehicle.status) ~= nil then
---                     TriggerServerEvent('cash-vehicletuner:server:LoadStatus', vehicle.status, vehicle.plate)
---                 end
-                
---                 if vehicle.drivingdistance ~= nil then
---                     local amount = round(vehicle.drivingdistance / 1000, -2)
---                     TriggerEvent('cash-overallhud:client:UpdateDrivingMeters', true, amount)
---                     TriggerServerEvent('cash-vehicletuner:server:UpdateDrivingDistance', vehicle.drivingdistance, vehicle.plate)
---                 end
-
---                 SetVehicleNumberPlateText(veh, vehicle.plate)
---                 SetEntityHeading(veh, Depots[currentGarage].takeVehicle.h)
---                 TaskWarpPedIntoVehicle(GetPlayerPed(-1), veh, -1)
---                 exports['LegacyFuel']:SetFuel(veh, vehicle.fuel)
---                 SetEntityAsMissionEntity(veh, true, true)
---                 doCarDamage(veh, vehicle)
---                 TriggerServerEvent('cash-garage:server:updateVehicleState', 0, vehicle.plate, vehicle.garage)
---                 RebornCore.Functions.Notify("Vehicle out: Motor: " .. enginePercent .. "% Body: " .. bodyPercent.. "% Fuel: "..currentFuel.. "%", "primary", 4500)
---                 --closeMenuFull()
---                 SetVehicleEngineOn(veh, true, true)
---             end, vehicle.plate)
---             TriggerEvent("vehiclekeys:client:SetOwner", vehicle.plate)
---         end, Depots[currentGarage].spawnPoint, true)
---     end
-
---     TriggerEvent("vehiclekeys:client:SetOwner", GetVehicleNumberPlateText(GetVehiclePedIsIn(GetPlayerPed(-1), false)))
--- end)
-
--- function AddTemporaryBlip(vehicle)  
---     local VehicleCoords = GetEntityCoords(vehicle)
---     local TempBlip = AddBlipForCoord(VehicleCoords)
---     local VehicleData = RebornCore.Shared.VehicleModels[GetEntityModel(vehicle)]
-
---     SetBlipSprite (TempBlip, 225)
---     SetBlipDisplay(TempBlip, 4)
---     SetBlipScale  (TempBlip, 0.85)
---     SetBlipAsShortRange(TempBlip, true)
---     SetBlipColour(TempBlip, 0)
-
---     BeginTextCommandSetBlipName("STRING")
---     AddTextComponentSubstringPlayerName("Temp Blip: "..VehicleData["name"])
---     EndTextCommandSetBlipName(TempBlip)
---     RebornCore.Functions.Notify("Your "..VehicleData["name"].." is temporarily (1min) indicated on the map!", "success", 10000)
-
---     SetTimeout(60 * 1000, function()
---         RebornCore.Functions.Notify('Your vehicle is NOT shown on the map anymore!', 'error')
---         RemoveBlip(TempBlip)
---     end)
--- end
 
 DrawText3Ds = function(x, y, z, text)
 	SetTextScale(0.35, 0.35)
@@ -249,10 +62,6 @@ Citizen.CreateThread(function()
     end
 end)
 
--- function yeet(label)
---     print(label)
--- end
-
 function HouseGarage(house)
     RebornCore.Functions.TriggerCallback("cash-garage:server:GetHouseVehicles", function(result)
         ped = GetPlayerPed(-1);
@@ -260,10 +69,7 @@ function HouseGarage(house)
         ClearMenu()
 
         if result == nil then
-            -- RebornCore.Functions.Notify("You have no vehicles in your garage", "error", 5000)
             TriggerEvent('reborn:notify:send', "Sistema","Você não tem carro na sua garagem","erro", 3500)
-
-            --closeMenuFull()
         else
             Menu.addButton(HouseGarages[house].label, "yeet", HouseGarages[house].label)
 
@@ -293,47 +99,6 @@ function HouseGarage(house)
         Menu.addButton("Back", "MenuHouseGarage", house)
     end, house)
 end
-
--- function getPlayerVehicles(garage)
---     local vehicles = {}
-
---     return vehicles
--- end
-
--- function DepotLijst()
---     RebornCore.Functions.TriggerCallback("cash-garage:server:GetDepotVehicles", function(result)
---         ped = GetPlayerPed(-1);
---         MenuTitle = "Depot Vehicles :"
---         ClearMenu()
-
---         if result == nil then
---             RebornCore.Functions.Notify("There are no vehicles in the depot", "error", 5000)
---             --closeMenuFull()
---         else
---             Menu.addButton(Depots[currentGarage].label, "yeet", Depots[currentGarage].label)
-
---             for k, v in pairs(result) do
---                 enginePercent = round(v.engine / 10, 0)
---                 bodyPercent = round(v.body / 10, 0)
---                 currentFuel = v.fuel
-
-
---                 if v.state == 0 then
---                     v.state = "Depot"
---                 end
-
---                 local label = RebornCore.Shared.Vehicles[v.vehicle]["name"]
---                 if RebornCore.Shared.Vehicles[v.vehicle]["brand"] ~= nil then
---                     label = RebornCore.Shared.Vehicles[v.vehicle]["brand"].." "..RebornCore.Shared.Vehicles[v.vehicle]["name"]
---                 end
---                 Menu.addButton(label, "TakeOutDepotVehicle", v, v.state .. " ($"..v.depotprice..")", " Motor: " .. enginePercent.."%", " Body: " .. bodyPercent.."%", " Fuel: "..currentFuel.."%")
---             end
---         end
-            
---         Menu.addButton("Back", "MenuDepot",nil)
---     end)
--- end
-
 
 RegisterNetEvent('Reborn:Garagem:Depot:Open')
 AddEventHandler('Reborn:Garagem:Depot:Open', function()
@@ -399,8 +164,6 @@ AddEventHandler('Reborn:JobGaragem:Open', function()
                 if PlayerData.job.name == v.Job or PlayerData.job.name == v.Job2 then
                     if not IsPedInAnyVehicle(ped) then
                         for _, info in pairs(v.carros) do
-                            -- print(info.carro)
-
                             SendNUIMessage({
                                 addcarro = true,
                                 imagem = info.carro,
@@ -422,8 +185,6 @@ AddEventHandler('Reborn:JobGaragem:Open', function()
                 elseif v.Job == "all" then
                     if not IsPedInAnyVehicle(ped) then
                         for _, info in pairs(v.carros) do
-                            -- print(info.carro)
-
                             SendNUIMessage({
                                 addcarro = true,
                                 imagem = info.carro,
@@ -461,7 +222,7 @@ AddEventHandler('Reborn:Garagem:Open', function()
                 RebornCore.Functions.TriggerCallback("cash-garage:server:GetUserVehicles", function(result)
                     if result == nil then
                         TriggerEvent('reborn:notify:send', "Sistema","Nenhum veículo nesta garagem","erro", 3500)
-                        -- --closeMenuFull()
+
                     else
                         for k, v in pairs(result) do
                             enginePercent = round(v.engine / 10, 0)
@@ -511,16 +272,6 @@ RegisterNUICallback('Reborn:Garagem:Close', function(data, cb)
     SetNuiFocus(false, false)
 end)
 
-
--- function TakeOutDepotVehicle(vehicle)
---     if vehicle.state == "Depot" then
---         TriggerServerEvent("cash-garage:server:PayDepotPrice", vehicle)
---     end
--- end
-
-
-
-
 RegisterNetEvent('Reborn:Depot:SpawnCarro')
 AddEventHandler('Reborn:Depot:SpawnCarro', function(placa)
     RebornCore.Functions.TriggerCallback("cash-garage:server:GetDepotVehicles", function(result)
@@ -558,15 +309,12 @@ AddEventHandler('Reborn:Depot:SpawnCarro', function(placa)
                         
                                         RebornCore.Functions.SetVehicleProperties(veh, properties)
                                         SetVehicleNumberPlateText(veh, v.plate)
-                                        -- SetEntityHeading(veh, Depots[currentGarage].spawnPoint.h)
                                         SetEntityHeading(veh, Depots[currentGarage].spawnPoint.h)
                                         exports['LegacyFuel']:SetFuel(veh, v.fuel)
                                         doCarDamage(veh, v)
                                         SetEntityAsMissionEntity(veh, true, true)
                                         TriggerServerEvent('cash-garage:server:updateVehicleState', 0, v.plate, v.garage)
-                                        -- RebornCore.Functions.Notify("Vehicle out: Motor: " .. enginePercent .. "% Body: " .. bodyPercent.. "% Fuel: "..currentFuel.. "%", "primary", 4500)
                                         TriggerEvent('reborn:notify:send', "Sistema","Veículo retirado da garagem","sucesso", 3500)
-                                        -- --closeMenuFull()
                                         TaskWarpPedIntoVehicle(GetPlayerPed(-1), veh, -1)
                                         TriggerEvent("vehiclekeys:client:SetOwner", GetVehicleNumberPlateText(veh))
                                         SetVehicleEngineOn(veh, true, true)
@@ -577,7 +325,6 @@ AddEventHandler('Reborn:Depot:SpawnCarro', function(placa)
                     else
                         RebornCore.Functions.SpawnVehicle(v.vehicle, function(veh)
                             RebornCore.Functions.TriggerCallback('cash-garage:server:GetVehicleProperties', function(properties)
-                                -- print('entrou aqui2')
                                 if v.plate ~= nil then
                                     OutsideVehicles[v.plate] = veh
                                     TriggerServerEvent('cash-garagesystem:server:UpdateOutsideVehicles', OutsideVehicles)
@@ -600,15 +347,12 @@ AddEventHandler('Reborn:Depot:SpawnCarro', function(placa)
                 
                                 RebornCore.Functions.SetVehicleProperties(veh, properties)
                                 SetVehicleNumberPlateText(veh, v.plate)
-                                -- SetEntityHeading(veh, Depots[currentGarage].spawnPoint.h)
                                 SetEntityHeading(veh, Depots[currentGarage].spawnPoint.h)
                                 exports['LegacyFuel']:SetFuel(veh, v.fuel)
                                 doCarDamage(veh, v)
                                 SetEntityAsMissionEntity(veh, true, true)
                                 TriggerServerEvent('cash-garage:server:updateVehicleState', 0, v.plate, v.garage)
-                                -- RebornCore.Functions.Notify("Vehicle out: Motor: " .. enginePercent .. "% Body: " .. bodyPercent.. "% Fuel: "..currentFuel.. "%", "primary", 4500)
                                 TriggerEvent('reborn:notify:send', "Sistema","Veículo retirado da garagem","sucesso", 3500)
-                                -- --closeMenuFull()
                                 TaskWarpPedIntoVehicle(GetPlayerPed(-1), veh, -1)
                                 TriggerEvent("vehiclekeys:client:SetOwner", GetVehicleNumberPlateText(veh))
                                 SetVehicleEngineOn(veh, true, true)
@@ -662,8 +406,6 @@ RegisterNUICallback('Reborn:Garagem:SpawnCarro', function(data, cb)
                                 doCarDamage(veh, v)
                                 SetEntityAsMissionEntity(veh, true, true)
                                 TriggerServerEvent('cash-garage:server:updateVehicleState', 0, v.plate, v.garage)
-                                -- RebornCore.Functions.Notify("Vehicle out: Motor: " .. enginePercent .. "% Body: " .. bodyPercent.. "% Fuel: "..currentFuel.. "%", "primary", 4500)
-                                --closeMenuFull()
                                 TaskWarpPedIntoVehicle(GetPlayerPed(-1), veh, -1)
                                 TriggerEvent("vehiclekeys:client:SetOwner", GetVehicleNumberPlateText(veh))
                                 SetVehicleEngineOn(veh, true, true)
@@ -736,69 +478,7 @@ function dump(t, indent, done)
     end
 end
 
-
--- function TakeOutVehicle(vehicle)
---     print(dump(vehicle))
---     if vehicle.state == "Garage" then
---         enginePercent = round(vehicle.engine / 10, 1)
---         bodyPercent = round(vehicle.body / 10, 1)
---         currentFuel = vehicle.fuel
-
---         RebornCore.Functions.SpawnVehicle(vehicle.vehicle, function(veh)
---             RebornCore.Functions.TriggerCallback('cash-garage:server:GetVehicleProperties', function(properties)
-
---                 if vehicle.plate ~= nil then
---                     OutsideVehicles[vehicle.plate] = veh
---                     TriggerServerEvent('cash-garagesystem:server:UpdateOutsideVehicles', OutsideVehicles)
---                 end
-
---                 if vehicle.status ~= nil and next(vehicle.status) ~= nil then
---                     TriggerServerEvent('cash-vehicletuner:server:LoadStatus', vehicle.status, vehicle.plate)
---                 end
-
---                 if vehicle.vehicle == "urus" then
---                     SetVehicleExtra(veh, 1, false)
---                     SetVehicleExtra(veh, 2, true)
---                 end
-                
---                 if vehicle.drivingdistance ~= nil then
---                     local amount = round(vehicle.drivingdistance / 1000, -2)
---                     TriggerEvent('cash-overallhud:client:UpdateDrivingMeters', true, amount)
---                     TriggerServerEvent('cash-vehicletuner:server:UpdateDrivingDistance', vehicle.drivingdistance, vehicle.plate)
---                 end
-
---                 RebornCore.Functions.SetVehicleProperties(veh, properties)
---                 SetVehicleNumberPlateText(veh, vehicle.plate)
---                 SetEntityHeading(veh, Garages[currentGarage].spawnPoint.h)
---                 exports['LegacyFuel']:SetFuel(veh, vehicle.fuel)
---                 doCarDamage(veh, vehicle)
---                 SetEntityAsMissionEntity(veh, true, true)
---                 TriggerServerEvent('cash-garage:server:updateVehicleState', 0, vehicle.plate, vehicle.garage)
---                 RebornCore.Functions.Notify("Vehicle out: Motor: " .. enginePercent .. "% Body: " .. bodyPercent.. "% Fuel: "..currentFuel.. "%", "primary", 4500)
---                 --closeMenuFull()
---                 TaskWarpPedIntoVehicle(GetPlayerPed(-1), veh, -1)
---                 TriggerEvent("vehiclekeys:client:SetOwner", GetVehicleNumberPlateText(veh))
---                 SetVehicleEngineOn(veh, true, true)
---             end, vehicle.plate)
-            
---         end, Garages[currentGarage].spawnPoint, true)
---     elseif vehicle.state == "Out" then
---         RebornCore.Functions.Notify("Is your vehicle in the depot??", "error", 2500)
---     elseif vehicle.state == "In Impound" then
---         RebornCore.Functions.Notify("This vehicle has been seized by the Police", "error", 4000)
---     end
--- end
-
--- RegisterCommand('g',function(source,args,rawCommand)
--- 	local jogador1 = PlayerPedId()
--- 	if jogador1 then
--- 		TriggerEvent('reborn:open:garagem')
--- 	end	
--- end)
-
 local toggle = "none"
-
-
 
 RegisterNetEvent('reborn:open:garagem')
 AddEventHandler('reborn:open:garagem', function()
@@ -817,59 +497,6 @@ AddEventHandler('reborn:open:garagem', function()
           SetNuiFocus(false, false)
 	end
 end)
-
-
--- function TakeOutDepotVehicle(vehicle)
---     if vehicle.state == "Depot" then
---         TriggerServerEvent("cash-garage:server:PayDepotPrice", vehicle)
---     end
--- end
-
--- function TakeOutGarageVehicle(vehicle)
---     if vehicle.state == "Garage" then
---         RebornCore.Functions.SpawnVehicle(vehicle.vehicle, function(veh)
---             RebornCore.Functions.TriggerCallback('cash-garage:server:GetVehicleProperties', function(properties)
---                 RebornCore.Functions.SetVehicleProperties(veh, properties)
---                 enginePercent = round(vehicle.engine / 10, 1)
---                 bodyPercent = round(vehicle.body / 10, 1)
---                 currentFuel = vehicle.fuel
-
---                 if vehicle.plate ~= nil then
---                     OutsideVehicles[vehicle.plate] = veh
---                     TriggerServerEvent('cash-garagesystem:server:UpdateOutsideVehicles', OutsideVehicles)
---                 end
-                
-                
---                 if vehicle.drivingdistance ~= nil then
---                     local amount = round(vehicle.drivingdistance / 1000, -2)
---                     TriggerEvent('cash-overallhud:client:UpdateDrivingMeters', true, amount)
---                     TriggerServerEvent('cash-vehicletuner:server:UpdateDrivingDistance', vehicle.drivingdistance, vehicle.plate)
---                 end
-
---                 if vehicle.vehicle == "urus" then
---                     SetVehicleExtra(veh, 1, false)
---                     SetVehicleExtra(veh, 2, true)
---                 end
-
---                 if vehicle.status ~= nil and next(vehicle.status) ~= nil then
---                     TriggerServerEvent('cash-vehicletuner:server:LoadStatus', vehicle.status, vehicle.plate)
---                 end
-
---                 SetVehicleNumberPlateText(veh, vehicle.plate)
---                 SetEntityHeading(veh, HouseGarages[currentHouseGarage].takeVehicle.h)
---                 TaskWarpPedIntoVehicle(GetPlayerPed(-1), veh, -1)
---                 exports['LegacyFuel']:SetFuel(veh, vehicle.fuel)
---                 SetEntityAsMissionEntity(veh, true, true)
---                 doCarDamage(veh, vehicle)
---                 TriggerServerEvent('cash-garage:server:updateVehicleState', 0, vehicle.plate, vehicle.garage)
---                 RebornCore.Functions.Notify("Vehicle out: Motor: " .. enginePercent .. "% Body: " .. bodyPercent.. "% Fuel: "..currentFuel.. "%", "primary", 4500)
---                 --closeMenuFull()
---                 TriggerEvent("vehiclekeys:client:SetOwner", GetVehicleNumberPlateText(veh))
---                 SetVehicleEngineOn(veh, true, true)
---             end, vehicle.plate)
---         end, HouseGarages[currentHouseGarage].takeVehicle, true)
---     end
--- end
 
 function doCarDamage(currentVehicle, veh)
 	smash = false
@@ -938,7 +565,6 @@ Citizen.CreateThread(function()
 
             if putDist <= 25 and IsPedInAnyVehicle(ped) then
                 inGarageRange = true
-                -- DrawMarker(36, Garages[k].putVehicle.x, Garages[k].putVehicle.y, Garages[k].putVehicle.z, 0, 0, 0, 0, 0, 0.9, 0.5, 0.9, 0.9, 0, 127, 0, 255, true, true, false, false, false, false, false)
                 if putDist <= 2.5 then
                     DrawText3Ds(Garages[k].putVehicle.x, Garages[k].putVehicle.y, Garages[k].putVehicle.z + 0.5, '~b~E~w~ - Guardar Veículo')
                     if IsControlJustPressed(0, 38) then
@@ -958,7 +584,6 @@ Citizen.CreateThread(function()
                                     OutsideVehicles[plate] = veh
                                     TriggerServerEvent('cash-garagesystem:server:UpdateOutsideVehicles', OutsideVehicles)
                                 end
-                                -- RebornCore.Functions.Notify("Vehicle stored in, "..Garages[k].label, "primary", 4500)
                                 TriggerEvent('reborn:notify:send', "Sistema","Carro Guardado","sucesso", 3500)
                             else
                                 TriggerEvent('reborn:notify:send', "Sistema","Ninguem é dono deste veículo","erro", 3500)
@@ -991,7 +616,6 @@ Citizen.CreateThread(function()
 
             if putDist <= 25 and IsPedInAnyVehicle(ped) then
                 inGarageRange = true
-                -- DrawMarker(36, Garages[k].putVehicle.x, Garages[k].putVehicle.y, Garages[k].putVehicle.z, 0, 0, 0, 0, 0, 0.9, 0.5, 0.9, 0.9, 0, 127, 0, 255, true, true, false, false, false, false, false)
                 if putDist <= 2.5 then
                     DrawText3Ds(JobGaragens[k].putVehicle.x, JobGaragens[k].putVehicle.y, JobGaragens[k].putVehicle.z + 0.5, '~b~E~w~ - Guardar Veículo')
                     if IsControlJustPressed(0, 38) then
@@ -1062,10 +686,8 @@ Citizen.CreateThread(function()
                                             OutsideVehicles[plate] = veh
                                             TriggerServerEvent('cash-garagesystem:server:UpdateOutsideVehicles', OutsideVehicles)
                                         end
-                                        -- RebornCore.Functions.Notify("Vehicle stored, "..HouseGarages[currentHouseGarage].label, "primary", 4500)
                                         TriggerEvent('reborn:notify:send', "Sistema","Carro guardado","sucesso", 3500)
                                     else
-                                        -- RebornCore.Functions.Notify("No one owns this vehicle...", "error", 3500)
                                         TriggerEvent('reborn:notify:send', "Sistema","Este veículo não é seu.","erro", 3500)
                                     end
                                 end, plate, currentHouseGarage)
@@ -1076,7 +698,6 @@ Citizen.CreateThread(function()
                     end
 
                     if takeDist > 1.99 and not Menu.hidden then
-                        --closeMenuFull()
                     end
                 end
             end
@@ -1087,46 +708,6 @@ Citizen.CreateThread(function()
         end
     end
 end)
-
--- Citizen.CreateThread(function()
---     Citizen.Wait(1000)
---     while true do
---         Citizen.Wait(5)
---         local ped = GetPlayerPed(-1)
---         local pos = GetEntityCoords(ped)
---         local inGarageRange = false
-
---         for k, v in pairs(Depots) do
---             local takeDist = GetDistanceBetweenCoords(pos, Depots[k].takeVehicle.x, Depots[k].takeVehicle.y, Depots[k].takeVehicle.z)
---             if takeDist <= 15 then
---                 inGarageRange = true
---                 DrawMarker(36, Depots[k].takeVehicle.x, Depots[k].takeVehicle.y, Depots[k].takeVehicle.z, 0.0, 0.0, 1.5, 1.0, 1.5, 1.5, 1.5, 1, 1.15, 235, 247, 0, 222, false, false, false, true, false, false, false)
---                 if takeDist <= 1.5 then
---                     if not IsPedInAnyVehicle(ped) then
---                         DrawText3Ds(Depots[k].takeVehicle.x, Depots[k].takeVehicle.y, Depots[k].takeVehicle.z + 0.5, '~g~E~w~ - Towed Veh/Depot')
---                         if IsControlJustPressed(1, 177) and not Menu.hidden then
---                             close()
---                             PlaySound(-1, "SELECT", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0, 0, 1)
---                         end
---                         if IsControlJustPressed(0, 38) then
---                             TriggerEvent('Reborn:Garagem:Depot:Open')
---                         end
---                     end
---                 end
-
---                 Menu.renderGUI()
-
---                 if takeDist >= 4 and not Menu.hidden then
---                     --closeMenuFull()
---                 end
---             end
---         end
-
---         if not inGarageRange then
---             Citizen.Wait(5000)
---         end
---     end
--- end)
 
 function round(num, numDecimalPlaces)
     return tonumber(string.format("%." .. (numDecimalPlaces or 0) .. "f", num))
