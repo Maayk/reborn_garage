@@ -1,19 +1,93 @@
-var placaatual = ''
-var listanormal = true
-
 $(document).ready(function () {
+    let placaAtual = '';
+    let listaNormal = true;
+
+    function toggleDepotAndVehicle(depotVisible) {
+        $('.depot-pagar-veiculo').toggle(depotVisible);
+        $('.pegar-veiculo').toggle(!depotVisible);
+    }
+
+    function clearGarage() {
+        $(".container-garage").fadeOut('fast');
+        $(".lista-carros").html("");
+        placaAtual = '';
+        $('#nome-do-carro').html('');
+        $('.numero-placa').html('');
+        $('#quilometragem').html('');
+        $('.field-progressbar, .field-progressbar2, .field-progressbar3').css("width", '0%');
+    }
+
+    function updateVehicleInfo($vehicle) {
+        const nomeCarro = $vehicle.find('.carro-nome').text();
+        const imagem = $vehicle.data('imagem');
+        const placa = $vehicle.find('.carro-placa').text();
+        const quilometragem = $vehicle.find('.carro-rodagem').text();
+        const lataria = $vehicle.find('.carro-lataria').text();
+        const motor = $vehicle.find('.carro-motor').text();
+        const combustivel = $vehicle.find('.carro-combustivel').text();
+
+        const baseUrl = 'http://127.0.0.1:8080/garagem/';
+
+        $('.left-carro-imagem')
+            .css({"opacity": '0.8', "background-image": `url('${baseUrl}${imagem}.png')`});
+
+        $('#nome-do-carro').html(nomeCarro);
+        $('.numero-placa').html(placa);
+        $('#quilometragem').html(`${quilometragem} / kmh`);
+        $('.field-progressbar').css("width", `${lataria}%`);
+        $('.field-progressbar2').css("width", `${motor}%`);
+        $('.field-progressbar3').css("width", `${combustivel}%`);
+    }
+
+    function spawnOrPayVehicle() {
+        $(".container-garage").fadeOut('fast');
+        $.post("https://reborn_garage/Reborn:Depot:SpawnCarro", JSON.stringify({
+            placa: placaAtual,
+            lista: listaNormal,
+        }));
+        $('.left-carro-imagem').css({"opacity": '0', "background-image": "url('img/none.png')"});
+        clearGarage();
+        if (!listaNormal) {
+            listaNormal = true;
+        }
+    }
+
+    $(document).on('click', '.veiculo-info', function (e) {
+        const $this = $(this);
+        placaAtual = $this.data('placa');
+        updateVehicleInfo($this);
+    });
+
+    $(document).on('click', '.depot-pagar-veiculo', function (e) {
+        spawnOrPayVehicle();
+    });
+
+    $(document).on('click', '.pegar-veiculo', function (e) {
+        if (placaAtual !== '') {
+            spawnOrPayVehicle();
+        } else {
+            console.log('');
+        }
+    });
+
+    $(document).on('click', '.fechar-garagem', function (e) {
+        $(".container-garage").fadeOut('fast');
+        $('.left-carro-imagem').css({"opacity": '0', "background-image": "url('img/none.png')"});
+        clearGarage();
+        $.post("https://reborn_garage/Reborn:Garagem:Close", JSON.stringify({}));
+        listaNormal = true;
+    });
+
     window.addEventListener("message", function (event) {
         const dados = event.data;
         const carroid = Math.floor(Math.random() * 100000);
 
         if (dados.placa === dados.carro) {
-            listanormal = false;
+            listaNormal = false;
             // console.log('lista normal é falsa')
         }
 
-        const depotVisible = dados.depot === true;
-        $('.depot-pagar-veiculo').toggle(depotVisible);
-        $('.pegar-veiculo').toggle(!depotVisible);
+        toggleDepotAndVehicle(dados.depot === true);
 
         const modelo = `
           <div class="veiculo-info carro-id-${carroid}">
@@ -32,8 +106,7 @@ $(document).ready(function () {
           </div>`;
 
         if (dados.limpando === true) {
-            $(".container-garage").fadeOut('fast');
-            $(".lista-carros").html("");
+            clearGarage();
         }
 
         if (dados.addcarro === true) {
@@ -46,89 +119,4 @@ $(document).ready(function () {
 
         }
     });
-});
-
-$(document).on('click', '.veiculo-info', function (e) {
-    const $this = $(this);
-    const placaatual = $this.data('placa');
-    const imagem = $this.data('imagem');
-    const nomecarro = $this.find('.carro-nome').text();
-    const quilometragem = $this.find('.carro-rodagem').text();
-    const status = $this.find('.carro-status').text();
-    const placa = $this.find('.carro-placa').text();
-    const lataria = $this.find('.carro-lataria').text();
-    const motor = $this.find('.carro-motor').text();
-    const combustivel = $this.find('.carro-combustivel').text();
-
-    const baseUrl = 'http://127.0.0.1:8080/garagem/';
-
-    $('.left-carro-imagem')
-        .css("opacity", '0.8')
-        .css("background-image", `url('${baseUrl}${imagem}.png')`);
-
-    $('#nome-do-carro').html(nomecarro);
-    $('#quilometragem').html(`${quilometragem} / kmh`);
-    // $('#status-carro').html(status);
-    $('.numero-placa').html(placa);
-    $('.field-progressbar').css("width", `${lataria}%`);
-    $('.field-progressbar2').css("width", `${motor}%`);
-    $('.field-progressbar3').css("width", `${combustivel}%`);
-});
-
-$(document).on('click', '.depot-pagar-veiculo', function (e) {
-    $(".container-garage").fadeOut('fast');
-    
-    $.post("https://reborn_garage/Reborn:Depot:SpawnCarro", JSON.stringify({
-        placa: placaatual,
-        lista: listanormal,
-    }));
-
-    const $leftCarroImagem = $('.left-carro-imagem');
-    $leftCarroImagem.css("opacity", '0');
-    $leftCarroImagem.css("background-image", "url('img/none.png')");
-    
-    $(".lista-carros").html("");
-    placaatual = '';
-    $('#nome-do-carro').html('');
-    $('.numero-placa').html('');
-    $('#quilometragem').html('');
-    // $('#status-carro').html('');
-    $('.field-progressbar').css("width", '0%');
-    $('.field-progressbar2').css("width", '0%');
-    $('.field-progressbar3').css("width", '0%');
-});
-
-
-$(document).on('click', '.pegar-veiculo', function (e) {
-    if (placaatual !== '') {
-        $(".container-garage").fadeOut('fast');
-        $.post("https://reborn_garage/Reborn:Garagem:SpawnCarro", JSON.stringify({
-            placa: placaatual,
-            lista: listanormal,
-        }));
-        $('.left-carro-imagem').css({"opacity": '0', "background-image": "url('img/none.png')"});
-        $(".lista-carros").html("");
-        placaatual = '';
-        $('#nome-do-carro, .numero-placa, #quilometragem').html('');
-        // $('#status-carro').html('');
-        $('.field-progressbar, .field-progressbar2, .field-progressbar3').css("width", '0%');
-
-        if (listanormal === false) {
-            listanormal = true;
-        }
-    } else {
-        console.log('');
-    }
-});
-
-$(document).on('click', '.fechar-garagem', function (e) {
-    $(".container-garage").fadeOut('fast');
-    $('.left-carro-imagem').css({"opacity": '0', "background-image": "url('img/none.png')"});
-    $(".lista-carros").html("");
-    placaatual = '';
-    $('#nome-do-carro, #quilometragem, .numero-placa').html('');
-    // $('#status-carro').html('');
-    $('.field-progressbar, .field-progressbar2, .field-progressbar3').css("width", '0%');
-    $.post("https://reborn_garage/Reborn:Garagem:Close", JSON.stringify({}));
-    listanormal = true;
 });
